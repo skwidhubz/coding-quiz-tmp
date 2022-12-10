@@ -5,6 +5,32 @@
 // console.log("timer");
 // };
 
+var timerEl = document.getElementById("timer-value")
+var secondsLeft = 15;
+
+setTime()
+
+function setTime() { //master quiz timer, color changes as time reduces lower than 10 and 5
+    var timerInterval = setInterval(function() {
+        secondsLeft --;
+        timerEl.textContent = secondsLeft;
+        if(secondsLeft > 11) {
+            timerEl.setAttribute("style", "color: green");
+        }
+        if(secondsLeft < 11 && secondsLeft > 6) {
+            timerEl.setAttribute("style", "color: orange");
+        }
+        if(secondsLeft < 6) {
+            timerEl.setAttribute("style", "color: red");
+        }
+        if(secondsLeft === 0) {
+            clearInterval(timerInterval);
+            gameOver() //function to end quiz
+        }
+    }, 1000);}
+
+
+
 // Q&A's variables
 // each object(q.c.a) has an array INDEX. 0 1 2 3 4
 var questions = [
@@ -38,7 +64,9 @@ var questions = [
        choices: ["$", "69", "UNI", "*"],
        answer: "*", },]
 
-
+function cycleQuestions(){
+    
+}
 
 // QUESTIONS       
 // set the question text for each new question
@@ -52,7 +80,6 @@ document.getElementById("#quizlist")
 
     for(let i = 0; i < questions.length; i++) {
     const element = questions[i];
-    listEl.textContent = questions[i];
 }
 
 // Create ordered list element
@@ -81,7 +108,10 @@ var score = 0;
 // enter name: text box and button
 // click button and then highscores page appears feat goback or clear high scores buttons
 
-
+function gameOver(){
+    timerEl.setAttribute("style", "color: blue");
+    timerEl.textContent = "Game Over!";
+}
 
 // HIGH SCORE KEEPER
 // high score record keeper

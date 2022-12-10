@@ -1,5 +1,8 @@
 * {
- font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: white;
+    color: black;
+    font-size: large;
 }
 
 body {
@@ -8,8 +11,6 @@ body {
     justify-content: space-between;
 }
 
-
-
 .header-top {
     display: flex;
     flex-direction: row;
@@ -17,55 +18,98 @@ body {
 }
 
 .left-aside {
+    border-color: black;
+    /* border-style: solid; */
+    border-width: 1px;
     display: flex;
     flex-grow: 1;
-    background-color: aqua;
     align-items: center;
     justify-content: center;
+}
+
+.left-aside img {
+    padding: 10px;
 }
 
 .center-top {
+    border-color: black;
+    /* border-style: solid; */
+    border-width: 1px;
     flex-grow: 5;
     display: flex;
-    background-color: rgb(119, 119, 180);
     align-items: center;
     justify-content: center;
+}
+
+.center-top img {
+    padding: 10px;
 }
 
 .right-aside {
+    display: flex;
+    flex-direction: column;
+    border-color: black;
+    /* border-style: solid; */
+    border-width: 1px;
     flex-grow: 1;
     display: flex;
-    background-color: cornflowerblue;
     align-items: center;
     justify-content: center;
 }
 
+.right-aside img {
+    flex: 0 0 10;
+    padding: 20px;
+}
+
+#timer-value {
+    flex: 0 0 50;
+    font-size: 40px;
+    padding: 5px;
+    padding-bottom: 20px;
+    font-family: monospace;
+}
+
 .main-section {
-    /* flex-grow: 5; */
+    border-color: black;
+    /* border-style: solid; */
+    border-width: 1px;
     display: flex;
     flex-direction: column;
-    background-color: royalblue;
     align-items: center;
     justify-content: space-evenly;
 }
 
 #main-title {
-    color: thistle;
-    background-color: green;
+    padding: 10px;
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
 }
 
 #quiz-section {
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
     /* this box is changed/hidden depending on state */  
-    color: antiquewhite;
 }
 
+#question-text {
+    padding: 10px;
+}
 
 button {
     color: white;
-    background-color: coral;
-    border-radius: 10%;
+    background-color: sandybrown ;
+    border-radius: 15%;
 }
 
 ol {
-    list-style: circle;
+    padding-right: 200px;
+    list-style: none;
+}
+
+#confirm-answer {
+    padding: 10px;
+    padding-bottom: 30px;
 }

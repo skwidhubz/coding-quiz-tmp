@@ -11,32 +11,32 @@
 
     <section class="header-top">
         <aside class="left-aside">
-        <h2>HIGH SCORE <span id="high-score"></span> points</h2>
-        (left-aside)
+        <a href="#high-scores"><img src="./assets/high-scores.png" height="31" width="271.50"></a>
         </aside>
 
         <section class="center-top">
-            <h1>CODING QUIZ!</h1>
+            <img src="./assets/quiz-banner.png" height="129" width="465">
         </section>
 
 
         <aside class="right-aside">
-            <h2>Time remaining: <span id="#timer-value"></span> seconds</h2>
-            (right-aside)
+            <img src="./assets/timer-logo.png" height="88" width="250">
+            <div id="timer-value">0</div>
         </aside>
     </section>
 
 <section class="main-section">
     <h1 id="main-title">QUIZ CONTENTS WITH TABLE</h1>
-
     <div id="quiz-section">
-        <h4 id="question-text"></h4>
+        <h4 id="question-text">Question: </h4>
         <ol id="quiz-list">
             <li data-state="hidden"><button id="choice1">text</button></li>
             <li data-state="hidden"><button id="choice2">text</button></li>
             <li data-state="hidden"><button id="choice3">text</button></li>
             <li data-state="hidden"><button id="choice4">text</button></li>
         </ol>
+        <hr>
+        <div id="confirm-answer">wrong/right</div>
 
     </div>
     </section>

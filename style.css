@@ -1,0 +1,71 @@
+* {
+ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+
+.header-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.left-aside {
+    display: flex;
+    flex-grow: 1;
+    background-color: aqua;
+    align-items: center;
+    justify-content: center;
+}
+
+.center-top {
+    flex-grow: 5;
+    display: flex;
+    background-color: rgb(119, 119, 180);
+    align-items: center;
+    justify-content: center;
+}
+
+.right-aside {
+    flex-grow: 1;
+    display: flex;
+    background-color: cornflowerblue;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-section {
+    /* flex-grow: 5; */
+    display: flex;
+    flex-direction: column;
+    background-color: royalblue;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#main-title {
+    color: thistle;
+    background-color: green;
+}
+
+#quiz-section {
+    /* this box is changed/hidden depending on state */  
+    color: antiquewhite;
+}
+
+
+button {
+    color: white;
+    background-color: coral;
+    border-radius: 10%;
+}
+
+ol {
+    list-style: circle;
+}

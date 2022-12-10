@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Coding Quiz - Tom Parker FSF</title>
+</head>
+<body>
+
+    <section class="header-top">
+        <aside class="left-aside">
+        <h2>HIGH SCORE <span id="high-score"></span> points</h2>
+        (left-aside)
+        </aside>
+
+        <section class="center-top">
+            <h1>CODING QUIZ!</h1>
+        </section>
+
+
+        <aside class="right-aside">
+            <h2>Time remaining: <span id="#timer-value"></span> seconds</h2>
+            (right-aside)
+        </aside>
+    </section>
+
+<section class="main-section">
+    <h1 id="main-title">QUIZ CONTENTS WITH TABLE</h1>
+
+    <div id="quiz-section">
+        <h4 id="question-text"></h4>
+        <ol id="quiz-list">
+            <li data-state="hidden"><button id="choice1">text</button></li>
+            <li data-state="hidden"><button id="choice2">text</button></li>
+            <li data-state="hidden"><button id="choice3">text</button></li>
+            <li data-state="hidden"><button id="choice4">text</button></li>
+        </ol>
+
+    </div>
+    </section>
+
+<script src="./script.js" async></script>
+</body>
+</html>

@@ -109,16 +109,17 @@ body {
 }
 
 #quiz-list li {
+    margin:0 0 10px 0; 
     padding: 5px;
     color: white;
     background-color: darkslateblue;
 }
 
-button {
+/* button {
     color: white;
     background-color: sandybrown ;
     border-radius: 15%;
-}
+} */
 
 ol {
     padding-right: 200px;

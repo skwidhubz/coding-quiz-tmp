@@ -7,6 +7,12 @@
 
 var timerEl = document.getElementById("timer-value")
 var secondsLeft = 15;
+var olEl = document.getElementById("quiz-list");
+var listEl = document.getElementById("quiz-list").children;
+var li1 = document.getElementById("quiz-list").children[0];
+var li2 = document.getElementById("quiz-list").children[1];
+var li3 = document.getElementById("quiz-list").children[2];
+var li4 = document.getElementById("quiz-list").children[3];
 
 setTime()
 
@@ -64,9 +70,20 @@ var questions = [
        choices: ["$", "69", "UNI", "*"],
        answer: "*", },]
 
+
+
 function cycleQuestions(){
-    
+    for (let i = 0; i < questions.length; i++){
+        console.log(questions[i]);
+        // li1.textContent = questions.choices[2];
+        // li2.textContent = questions[i];
+        // li3.textContent = questions[i];
+        // li4.textContent = questions[i];
+    }
 }
+
+cycleQuestions(questions);
+
 
 // QUESTIONS       
 // set the question text for each new question

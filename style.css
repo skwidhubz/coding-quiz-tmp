@@ -1,15 +1,20 @@
 * {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    background-color: white;
     color: black;
     font-size: large;
+}
+
+* button {
+    border-radius: 5px;
 }
 
 body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-color: rgb(229, 237, 251);
 }
+
 
 .header-top {
     display: flex;
@@ -35,7 +40,7 @@ body {
     border-color: black;
     /* border-style: solid; */
     border-width: 1px;
-    flex-grow: 5;
+    flex-grow: 10;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -73,17 +78,27 @@ body {
 
 .main-section {
     border-color: black;
-    /* border-style: solid; */
+    border-style: solid;
     border-width: 1px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
     padding: 10px;
-    border-color: black;
-    /* border-style: solid; */
-    border-width: 1px;
+}
 
+.landing-page {
+    display: flex;
+    flex-direction: column;
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    align-items: center;
+    justify-content: center;
+}
+
+#landing-title {
+    font-size: larger;
 }
 
 #quiz-section {
@@ -129,4 +144,11 @@ ol {
 #confirm-answer {
     padding: 10px;
     padding-bottom: 30px;
+}
+
+.high-score-page {
+    background-color: aqua;
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
 }

@@ -1,10 +1,3 @@
-// TIMER
-// TIMER()
-// function TIMER(){
-// setInterval(1000);
-// console.log("timer");
-// };
-
 var timerEl = document.getElementById("timer-value")
 var secondsLeft = 15;
 var olEl = document.getElementById("quiz-list");
@@ -13,8 +6,12 @@ var li1 = document.getElementById("quiz-list").children[0];
 var li2 = document.getElementById("quiz-list").children[1];
 var li3 = document.getElementById("quiz-list").children[2];
 var li4 = document.getElementById("quiz-list").children[3];
+var startButton = document.getElementsByClassName("start-button");
+var landingPage = document.getElementsByClassName("landing-page");
 
 setTime()
+
+
 
 function setTime() { //master quiz timer, color changes as time reduces lower than 10 and 5
     var timerInterval = setInterval(function() {
@@ -35,6 +32,11 @@ function setTime() { //master quiz timer, color changes as time reduces lower th
         }
     }, 1000);}
 
+startButton.addEventListener('click', startGame)
+
+function startGame(){
+    console.log("startgame")
+}
 
 
 // Q&A's variables

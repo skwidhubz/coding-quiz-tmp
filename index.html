@@ -8,25 +8,37 @@
     <title>Coding Quiz - T.Parker FS-Bootcamp</title>
 </head>
 <body>
+    <section class="top-section">
+        <section class="header-top">
+            <aside class="left-aside">
+            <a href="#high-scores"><img src="./assets/high-scores.png" height="31" width="271.50"></a>
+            </aside>
 
-    <section class="header-top">
-        <aside class="left-aside">
-        <a href="#high-scores"><img src="./assets/high-scores.png" height="31" width="271.50"></a>
-        </aside>
+            <section class="center-top">
+                <img src="./assets/quiz-banner.png" height="129" width="465">
+            </section>
 
-        <section class="center-top">
-            <img src="./assets/quiz-banner.png" height="129" width="465">
+
+            <aside class="right-aside">
+                <img src="./assets/timer-logo.png" height="60" width="200">
+                <div id="timer-value">-</div>
+            </aside>
         </section>
-
-
-        <aside class="right-aside">
-            <img src="./assets/timer-logo.png" height="60" width="200">
-            <div id="timer-value">-</div>
-        </aside>
     </section>
-
 <section class="main-section">
-    <h1 id="main-title">QUIZ CONTENTS WITH TABLE</h1>
+
+    <div class="landing-page">
+        <h1 id="landing-title" class="hidden">Welcome 🧪</h1>
+            <p>
+                Answer the questions before the time ⌛ is up.<br>
+                A correct guess adds 5 seconds 🔼 an incorrect guess detracts 5 seconds 🔽<br>
+                Can you be the code-quiz super mega champion? 🏆<br>
+                Click the button to begin...<br>
+            </p>
+        <button class="start-button">Engage! 🚀</button>
+        <hr>
+    </div>
+
     <div id="quiz-section">
         <h4 id="question-text">Question: </h4>
         <ol id="quiz-list">
@@ -37,9 +49,21 @@
         </ol>
         <hr>
         <div id="confirm-answer">wrong/right</div>
-
     </div>
-    </section>
+
+    <div class="high-score-page">
+        <h3>High Scores Leaderboard</h3>
+        <ol id="high-score-list">
+            <li>high score 1</li>
+            <li>high score 2</li>
+            <li>high score 3</li>
+            <li>high score 4</li>
+        </ol>
+        <hr>
+        <button>Clear Scores 🪄</button>
+    </div>
+
+</section>
 
 <script src="./script.js" async></script>
 </body>

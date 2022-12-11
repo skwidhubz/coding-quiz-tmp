@@ -2,17 +2,22 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: black;
     font-size: large;
+    font-weight: lighter;
 }
 
-* button {
+button {
     border-radius: 5px;
+    margin:0 0 10px 0; 
+    padding: 5px;
+    color: white;
+    background-color: darkslateblue;
 }
 
 body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: rgb(229, 237, 251);
+    background-color: whitesmoke;
 }
 
 
@@ -78,7 +83,7 @@ body {
 
 .main-section {
     border-color: black;
-    border-style: solid;
+    /* border-style: solid; */
     border-width: 1px;
     display: flex;
     flex-direction: column;
@@ -87,8 +92,10 @@ body {
     padding: 10px;
 }
 
-.landing-page {
-    display: flex;
+/* !!! LANDING PAGE SECTION !!!  */
+
+#landing-page {
+    display: flex; /* HIDDEN MECH - flex / none */
     flex-direction: column;
     border-color: black;
     border-style: solid;
@@ -101,11 +108,13 @@ body {
     font-size: larger;
 }
 
+/* !!! QUIZ PAGE SECTION !!!  */
+
 #quiz-section {
-    display: flex;
+    display: none; /* HIDDEN MECH - flex / none */
     flex-direction: column;
     border-color: black;
-    border-style: solid;
+    /* border-style: solid; */
     border-width: 1px;
     /* this box is changed/hidden depending on state */  
 }
@@ -116,6 +125,7 @@ body {
 
 #quiz-list ol {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     gap: 20px;
     background-color: white;
@@ -123,12 +133,11 @@ body {
     margin: 1px;
 }
 
-#quiz-list li {
-    margin:0 0 10px 0; 
-    padding: 5px;
-    color: white;
-    background-color: darkslateblue;
+
+#quiz-section > hr {
+    color: black;
 }
+
 
 /* button {
     color: white;
@@ -146,9 +155,26 @@ ol {
     padding-bottom: 30px;
 }
 
+/* !!! HIGH SCORES SECTION !!! */
+
 .high-score-page {
-    background-color: aqua;
+    display: none; /* HIDDEN MECH - flex / none */
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
     border-color: black;
     border-style: solid;
     border-width: 1px;
+}
+
+.high-score-page ol {
+    list-style: lower-roman;
+
+}
+
+.high-score-page button {
+    background-color: cornflowerblue;
+    font-size: small;
+    width: 190px;
+    height: 30px;
 }

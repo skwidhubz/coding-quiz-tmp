@@ -1,15 +1,22 @@
-var timerEl = document.getElementById("timer-value")
-var secondsLeft = 15;
-var olEl = document.getElementById("quiz-list");
+var timerEl = document.getElementById("timer-value") // timer element
+var secondsLeft = 15; // timer starts at 15 seconds
+var questionText = document.getElementById("question-text"); // question text element
+var olEl = document.getElementById("quiz-list"); // ordered list element
 var listEl = document.getElementById("quiz-list").children;
 var li1 = document.getElementById("quiz-list").children[0];
 var li2 = document.getElementById("quiz-list").children[1];
 var li3 = document.getElementById("quiz-list").children[2];
 var li4 = document.getElementById("quiz-list").children[3];
-var startButton = document.getElementsByClassName("start-button");
-var landingPage = document.getElementsByClassName("landing-page");
+var startButton = document.getElementById("start-button");
+var landingPage = document.getElementById("landing-page");
+var quizSection = document.getElementById("quiz-section");
+var highScoreData = localStorage.getItem("score") //score is remaining time.
+var highScore = document.getElementById("high-score"); // high score page
+var clearScores = document.getElementById("clear-button"); // clear high score list
+var returnToBase = document.getElementById("return-button"); // go back to main page
 
-setTime()
+
+
 
 
 
@@ -32,10 +39,13 @@ function setTime() { //master quiz timer, color changes as time reduces lower th
         }
     }, 1000);}
 
-startButton.addEventListener('click', startGame)
+startButton.addEventListener('click', startGame) // start button event listener
 
-function startGame(){
-    console.log("startgame")
+function startGame(){ // start game function
+    setTime()
+    console.log("startgame");
+    landingPage.setAttribute("style", "display: none;")
+    quizSection.setAttribute("style", "display: flex;")
 }
 
 
@@ -68,19 +78,20 @@ var questions = [
        answer: "Imperative",
      },
      {
-       title: "The universal selector in CSS is what?",
-       choices: ["$", "69", "UNI", "*"],
-       answer: "*", },]
+       title: "What is the correct syntax for declaring a variable in JavaScript?",
+       choices: ["var myVariable;", "variable myVariable;", "let myVariable;", "const myVariable;"],
+       answer: "var myVariable;", },]
 
 
 
-function cycleQuestions(){
+function cycleQuestions(){ // function to cycle through questions
     for (let i = 0; i < questions.length; i++){
-        console.log(questions[i]);
-        // li1.textContent = questions.choices[2];
-        // li2.textContent = questions[i];
-        // li3.textContent = questions[i];
-        // li4.textContent = questions[i];
+        console.log("cycleQuestions for loop is running");
+
+        // set the question text for each new question
+        questionText.textContent = questions[i].title;
+        console.log(questions[i].title);
+        
     }
 }
 
@@ -99,6 +110,8 @@ document.getElementById("#quizlist")
 
     for(let i = 0; i < questions.length; i++) {
     const element = questions[i];
+    console.log(element);
+
 }
 
 // Create ordered list element
@@ -127,14 +140,38 @@ var score = 0;
 // enter name: text box and button
 // click button and then highscores page appears feat goback or clear high scores buttons
 
+
+
 function gameOver(){
+    localStorage.setItem("score", score)
     timerEl.setAttribute("style", "color: blue");
     timerEl.textContent = "Game Over!";
+    quizSection.setAttribute("style", "display: none;")
+    highScore.setAttribute("style", "display: flex;")
+
 }
 
 // HIGH SCORE KEEPER
 // high score record keeper
 // gets data from quiz score, stored in localStorage, and displays highest value first. 
-// var highScore = localStorage.getItem("score")
 
+
+
+function highScoreKeeper() {
+    var highScoreData = localStorage.getItem("score")
+    console.log(highScoreData);
+    var highScoreList = document.getElementById("high-score-list");
+    var highScoreListEl = document.createElement("li");
+    highScoreListEl.textContent = highScoreData;
+    highScoreList.appendChild(highScoreListEl);
+}
+
+
+clearScores.addEventListener("click", restartGame)
+
+function restartGame() {
+    highScore.setAttribute("style", "display: none;")
+    landingPage.setAttribute("style", "display: flex;")
+
+}
 

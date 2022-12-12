@@ -2,21 +2,21 @@ var timerEl = document.getElementById("timer-value") // timer element
 var secondsLeft = 15; // timer starts at 15 seconds
 var questionText = document.getElementById("question-text"); // question text element
 var olEl = document.getElementById("quiz-list"); // ordered list element
-var listEl = document.getElementById("quiz-list").children;
-var li1 = document.getElementById("quiz-list").children[0];
-var li2 = document.getElementById("quiz-list").children[1];
-var li3 = document.getElementById("quiz-list").children[2];
-var li4 = document.getElementById("quiz-list").children[3];
-var startButton = document.getElementById("start-button");
-var landingPage = document.getElementById("landing-page");
-var quizSection = document.getElementById("quiz-section");
+var choiceButton1 = document.getElementById("choice1"); // choice button 1
+var choiceButton2 = document.getElementById("choice2"); // choice button 2
+var choiceButton3 = document.getElementById("choice3"); // choice button 3
+var choiceButton4 = document.getElementById("choice4"); // choice button 4
+var startButton = document.getElementById("start-button"); // start button
+var landingPage = document.getElementById("landing-page"); // landing page
+var quizSection = document.getElementById("quiz-section"); // quiz section
+var li1 = document.getElementById("high-score-list").children[0]; 
+var li2 = document.getElementById("high-score-list").children[1];
+var li3 = document.getElementById("high-score-list").children[2];
+var li4 = document.getElementById("high-score-list").children[3];
 var highScoreData = localStorage.getItem("score") //score is remaining time.
-var highScore = document.getElementById("high-score"); // high score page
+var highScore = document.getElementById("high-score-page"); // high score page
 var clearScores = document.getElementById("clear-button"); // clear high score list
 var returnToBase = document.getElementById("return-button"); // go back to main page
-
-
-
 
 
 
@@ -83,6 +83,9 @@ var questions = [
        answer: "var myVariable;", },]
 
 
+cycleQuestions(questions);
+cycleChoices(choices[i]);
+
 
 function cycleQuestions(){ // function to cycle through questions
     for (let i = 0; i < questions.length; i++){
@@ -91,11 +94,28 @@ function cycleQuestions(){ // function to cycle through questions
         // set the question text for each new question
         questionText.textContent = questions[i].title;
         console.log(questions[i].title);
-        
+
+
     }
 }
 
-cycleQuestions(questions);
+function cycleChoices(){ // function to cycle through questions
+    for (let i = 0; i < questions.length; i++){
+        console.log("cycleQuestions for loop is running");
+
+        // set the question text for each new question
+        questionText.textContent = questions[i].choices[i];
+        console.log(questions[i].choices[i]);
+        choiceButton1.textContent = questions[i].choices[0];
+        choiceButton2.textContent = questions[i].choices[1];
+        choiceButton3.textContent = questions[i].choices[2];
+        choiceButton4.textContent = questions[i].choices[3];
+
+    }
+}
+
+
+
 
 
 // QUESTIONS       
@@ -108,11 +128,14 @@ cycleQuestions(questions);
 
 document.getElementById("#quizlist")
 
-    for(let i = 0; i < questions.length; i++) {
-    const element = questions[i];
-    console.log(element);
+//     for(let i = 0; i < questions.length; i++) {
+//     const element = questions[i];
+//     console.log(element);
+// }
 
-}
+//     for(let i = 0; i < questions.choices[i].length; i++) {
+//     console.log(questions.choices[i]);
+// }
 
 // Create ordered list element
 var listEl = document.createElement("ol");
@@ -167,11 +190,19 @@ function highScoreKeeper() {
 }
 
 
-clearScores.addEventListener("click", restartGame)
+returnToBase.addEventListener("click", restartGame)
+
+clearScores.addEventListener("click", clearHighScores)
 
 function restartGame() {
     highScore.setAttribute("style", "display: none;")
     landingPage.setAttribute("style", "display: flex;")
+    secondsLeft = 15;
 
 }
+
+function clearHighScores() {
+    localStorage.clear();
+}
+
 

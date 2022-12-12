@@ -157,7 +157,7 @@ ol {
 
 /* !!! HIGH SCORES SECTION !!! */
 
-.high-score-page {
+#high-score-page {
     display: none; /* HIDDEN MECH - flex / none */
     flex-direction: column;
     justify-content: space-evenly;
@@ -167,12 +167,12 @@ ol {
     border-width: 1px;
 }
 
-.high-score-page ol {
+#high-score-page ol {
     list-style: lower-roman;
 
 }
 
-.high-score-page button {
+#high-score-page button {
     background-color: cornflowerblue;
     font-size: small;
     width: 190px;

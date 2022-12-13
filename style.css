@@ -1,6 +1,6 @@
 * {
     font-family: monospace;
-    color: black;
+    color: rgb(255, 255, 255);
     font-weight: bold;
 }
 
@@ -16,9 +16,11 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: whitesmoke;
+    background-color: whitesmoke;  
+    background-image: url(./assets/background_low.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
-
 
 .header-top {
     display: flex;
@@ -76,8 +78,9 @@ body {
     font-size: 30px;
     font-weight: 700;
     padding: 5px;
-    padding-bottom: 20px;
+    /* padding-bottom: 20px; */
     font-family: monospace;
+    background-color: rgb(140, 242, 255);
 }
 
 .main-section {
@@ -101,16 +104,18 @@ body {
     border-width: 1px;
     align-items: center;
     justify-content: center;
+    font-size: larger;
 }
 
 #landing-title {
-    font-size: larger;
+    font-size: large;
 }
 
 #landing-text-box {
     display: flex;
     flex-direction: row;
     text-align: center;
+    font-size: larger;
     padding: 20px;
 }
 
@@ -126,30 +131,33 @@ body {
 }
 
 #question-text {
+    font-size: 20px;
+    font-weight: bold;
     padding: 10px;
 }
 
 #quiz-list ol {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
     gap: 20px;
     background-color: white;
     padding: 5px;
     margin: 1px;
 }
 
+#quiz-list ol li {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: lightgrey;
+}
 
 #quiz-section > hr {
     color: black;
 }
-
-
-/* button {
-    color: white;
-    background-color: sandybrown ;
-    border-radius: 15%;
-} */
 
 ol {
     padding-right: 200px;
@@ -176,12 +184,16 @@ ol {
 #high-score-page ol {
     list-style: decimal;
     font-size: large;
+}
 
+#high-score-page h1 {
+    font-size: 30px;
 }
 
 #high-score-page button {
     background-color: cornflowerblue;
-    font-size: small;
-    width: 190px;
-    height: 30px;
+    font-size: 20px;
+    padding: 5px;
+    width: 220px;
+    height: 50px;
 }

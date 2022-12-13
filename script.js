@@ -120,11 +120,12 @@ function userClicks(event){
 }
 
 var answerEl = questions[currentQuestion].answer;
-var choiceClicks = getElementById("quz-list").children;
+var choiceClicks = document.getElementById("quiz-list").children;
 
-function checkAnswer(){ // function to check answer
+function checkAnswer(event){ // function to check answer
 
     console.log("check answer");
+    event.choiceClicks
     if (choiceClicks === answerEl) {
         console.log("correct")
         secondsLeft = secondsLeft + 5;

@@ -17,8 +17,7 @@ var highScoreData = localStorage.getItem("score") //score is remaining time.
 var highScore = document.getElementById("high-score-page"); // high score page
 var clearScores = document.getElementById("clear-button"); // clear high score list
 var returnToBase = document.getElementById("return-button"); // go back to main page
-
-
+var confirmAnswerEl = document.getElementById("confirm-answer"); // confirm answer element
 
 function setTime() { //master quiz timer, color changes as time reduces lower than 10 and 5
     var timerInterval = setInterval(function() {
@@ -47,7 +46,6 @@ function startGame(){ // start game function
     landingPage.setAttribute("style", "display: none;")
     quizSection.setAttribute("style", "display: flex;")
 }
-
 
 // Q&A's variables
 // each object(q.c.a) has an array INDEX. 0 1 2 3 4
@@ -82,88 +80,62 @@ var questions = [
        choices: ["var myVariable;", "variable myVariable;", "let myVariable;", "const myVariable;"],
        answer: "var myVariable;", },]
 
+console.log(questions[0].title)
 
-cycleQuestions(questions);
-cycleChoices(choices[i]);
+let currentQuestion = 0; // current question index
 
+console.log(questions[0].choices[1]);
 
-function cycleQuestions(){ // function to cycle through questions
-    for (let i = 0; i < questions.length; i++){
-        console.log("cycleQuestions for loop is running");
-
-        // set the question text for each new question
-        questionText.textContent = questions[i].title;
-        console.log(questions[i].title);
-
-
-    }
+function displayQuestions(){ // function to display questions
+    
+    questionText.textContent = questions[currentQuestion].title;
+    choiceButton1.textContent = questions[currentQuestion].choices[0];
+    choiceButton2.textContent = questions[currentQuestion].choices[1];
+    choiceButton3.textContent = questions[currentQuestion].choices[2];
+    choiceButton4.textContent = questions[currentQuestion].choices[3];
 }
 
-function cycleChoices(){ // function to cycle through questions
-    for (let i = 0; i < questions.length; i++){
-        console.log("cycleQuestions for loop is running");
+displayQuestions()
 
-        // set the question text for each new question
-        questionText.textContent = questions[i].choices[i];
-        console.log(questions[i].choices[i]);
-        choiceButton1.textContent = questions[i].choices[0];
-        choiceButton2.textContent = questions[i].choices[1];
-        choiceButton3.textContent = questions[i].choices[2];
-        choiceButton4.textContent = questions[i].choices[3];
-
-    }
+function nextQuestion(){ // function to move to next question
+    currentQuestion++
+    displayQuestions()
 }
 
+choiceClicks()
 
+var answer = questions[currentQuestion].answer
 
+function choiceClicks(){ 
+    choiceButton1.addEventListener('click', function(event) { checkAnswer() })
+    choiceButton2.addEventListener('click', function(event) { checkAnswer() })
+    choiceButton3.addEventListener('click', function(event) { checkAnswer() })
+    choiceButton4.addEventListener('click', function(event) { checkAnswer() })
+}
 
+function checkAnswer(){ // function to check answer
 
-// QUESTIONS       
-// set the question text for each new question
-// add text data to question ID per each question >> id="question-text" <<
-// Questions exist in an array variable and are called upon for each question, 1 - 6
-// run a for loop to cycle through the questions and the arrays of q's and a's.
-// Then we create a for loop to loop through the questions where you target the properties like title, 
-// choices, or answers to appear as you create the elements
+    console.log("check answer");
 
-document.getElementById("#quizlist")
-
-//     for(let i = 0; i < questions.length; i++) {
-//     const element = questions[i];
-//     console.log(element);
-// }
-
-//     for(let i = 0; i < questions.choices[i].length; i++) {
-//     console.log(questions.choices[i]);
-// }
-
-// Create ordered list element
-var listEl = document.createElement("ol");
-// Create ordered list items
-// var li = document.querySelectorAll("li");
-var li1 = document.createElement("li");
-var li2 = document.createElement("li");
-var li3 = document.createElement("li");
-var li4 = document.createElement("li");
-
-// ANSWER SELECTIONS
-// question must have a correct answer
-// when clicking on the button, checks the answer is right or wrong (truefalse) in relation to the question
-// each quiz question needs to have: question, answers X 4. each answer needs to be a true or false value. 
-// if true then add a score to localStorage...
-// key = score
-// data = 1 
-// var userScore = localStorage.setItem("score")
-//table creator 
-
-var score = 0;
+    if (choiceClicks === answer) {
+        console.log("correct")
+        secondsLeft = secondsLeft + 5;
+        confirmAnswerEl.textContent = "Correct!"
+        nextQuestion()
+    } else {
+        console.log("wrong")
+        secondsLeft = secondsLeft - 5;
+        confirmAnswerEl.textContent = "Wrong!"
+        nextQuestion()
+    }
+}
 
 // QUIZ COMPLETE
 // find score - setItem("score", "data")
 // enter name: text box and button
 // click button and then highscores page appears feat goback or clear high scores buttons
 
-
+var score = 0;
 
 function gameOver(){
     localStorage.setItem("score", score)
@@ -171,14 +143,11 @@ function gameOver(){
     timerEl.textContent = "Game Over!";
     quizSection.setAttribute("style", "display: none;")
     highScore.setAttribute("style", "display: flex;")
-
 }
 
 // HIGH SCORE KEEPER
 // high score record keeper
 // gets data from quiz score, stored in localStorage, and displays highest value first. 
-
-
 
 function highScoreKeeper() {
     var highScoreData = localStorage.getItem("score")
@@ -189,7 +158,6 @@ function highScoreKeeper() {
     highScoreList.appendChild(highScoreListEl);
 }
 
-
 returnToBase.addEventListener("click", restartGame)
 
 clearScores.addEventListener("click", clearHighScores)
@@ -198,7 +166,6 @@ function restartGame() {
     highScore.setAttribute("style", "display: none;")
     landingPage.setAttribute("style", "display: flex;")
     secondsLeft = 15;
-
 }
 
 function clearHighScores() {

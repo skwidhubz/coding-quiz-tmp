@@ -1,5 +1,6 @@
 var timerEl = document.getElementById("timer-value") // timer element
 var secondsLeft = 15; // timer starts at 15 seconds
+var highScoresImage = document.getElementById("high-scores-image"); // high scores image
 var questionText = document.getElementById("question-text"); // question text element
 var olEl = document.getElementById("quiz-list"); // ordered list element
 var choiceButton1 = document.getElementById("choice1"); // choice button 1
@@ -32,13 +33,14 @@ function setTime() { //master quiz timer, color changes as time reduces lower th
         if(secondsLeft < 6) {
             timerEl.setAttribute("style", "color: red");
         }
-        if(secondsLeft === 0) {
+        if(secondsLeft <= 0) {
             clearInterval(timerInterval);
             gameOver() //function to end quiz
         }
     }, 1000);}
 
 startButton.addEventListener('click', startGame) // start button event listener
+
 
 function startGame(){ // start game function
     setTime()
@@ -47,47 +49,53 @@ function startGame(){ // start game function
     quizSection.setAttribute("style", "display: flex;")
 }
 
+highScoresImage.addEventListener('click', highScoresPage) // high scores image event listener
+
+function highScoresPage(){
+    gameOver()
+    landingPage.setAttribute("style", "display: none;")
+    quizSection.setAttribute("style", "display: none;")
+    highScore.setAttribute("style", "display: flex;")
+}
+
 // Q&A's variables
 // each object(q.c.a) has an array INDEX. 0 1 2 3 4
 var questions = [
      {
        title: 'What case format does JavaScript use?',
        choices: ["Giraffe", "Suit", "Camel", "Eagle"],
-       answer: "Camel",
+       answer: 2,
      },
      {
        title: "What name is commonly used as the first program written in a lanugage?",
        choices: ["Hello There", "OK Computer", "Hello World", "Initialize"],
-       answer: "Hello World",
+       answer: 2,
      },
      {
        title: "A loop is defined by ____ ",
        choices: ["If", "For", "Else", "Loop"],
-       answer: "For",
+       answer: 1,
      },
      {
        title: "We stage using the GIT____ command",
        choices: ["Add", "Push", "Commit", "Init"],
-       answer: "Add",
+       answer: 0,
      },
      {
        title: "JavaScript is what type of language?",
        choices: ["Descriptive", "Imperative", "Objective", "Serif"],
-       answer: "Imperative",
+       answer: 1,
      },
      {
        title: "What is the correct syntax for declaring a variable in JavaScript?",
        choices: ["var myVariable;", "variable myVariable;", "let myVariable;", "const myVariable;"],
-       answer: "var myVariable;", },]
+       answer: 0, },]
 
-console.log(questions[0].title)
 
 let currentQuestion = 0; // current question index
 
-console.log(questions[0].choices[1]);
-
 function displayQuestions(){ // function to display questions
-    
+    console.log("display question and choices");
     questionText.textContent = questions[currentQuestion].title;
     choiceButton1.textContent = questions[currentQuestion].choices[0];
     choiceButton2.textContent = questions[currentQuestion].choices[1];
@@ -102,22 +110,22 @@ function nextQuestion(){ // function to move to next question
     displayQuestions()
 }
 
-choiceClicks()
+userClicks()
 
-var answer = questions[currentQuestion].answer
-
-function choiceClicks(){ 
+function userClicks(event){ 
     choiceButton1.addEventListener('click', function(event) { checkAnswer() })
     choiceButton2.addEventListener('click', function(event) { checkAnswer() })
     choiceButton3.addEventListener('click', function(event) { checkAnswer() })
     choiceButton4.addEventListener('click', function(event) { checkAnswer() })
 }
 
+var answerEl = questions[currentQuestion].answer;
+var choiceClicks = getElementById("quz-list").children;
+
 function checkAnswer(){ // function to check answer
 
     console.log("check answer");
-
-    if (choiceClicks === answer) {
+    if (choiceClicks === answerEl) {
         console.log("correct")
         secondsLeft = secondsLeft + 5;
         confirmAnswerEl.textContent = "Correct!"
@@ -135,7 +143,7 @@ function checkAnswer(){ // function to check answer
 // enter name: text box and button
 // click button and then highscores page appears feat goback or clear high scores buttons
 
-var score = 0;
+var score = [];
 
 function gameOver(){
     localStorage.setItem("score", score)
@@ -159,7 +167,6 @@ function highScoreKeeper() {
 }
 
 returnToBase.addEventListener("click", restartGame)
-
 clearScores.addEventListener("click", clearHighScores)
 
 function restartGame() {

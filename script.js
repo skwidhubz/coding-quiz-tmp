@@ -136,11 +136,18 @@ function nextQuestion(){ // function to move to next question
 
 userClicks()
 
-function checkAnswer(event){
-    console.log("target click") // function to check answer
-    if(event.target.userClicks === currentAnswer){
+function checkAnswer(event){    // function to check answer
+
+    var userChoice = userClicks(event)
+    // console.log("target click") 
+    console.log("check answer")
+
+    if(userClicks === currentAnswer){
         console.log("correct")}
-    else {console.log("incorrect")}
+
+    if (userClicks == !currentAnswer){
+        console.log("incorrect")
+    }
     }
 
 function userClicks(event){ 

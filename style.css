@@ -155,13 +155,24 @@ body {
     background-color: lightgrey;
 }
 
-#quiz-section > hr {
-    color: black;
+#quiz-list #choicebutton1 {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(255, 0, 0);
+}
+
+#quiz-section .q-button {
+    color: white;
+    background-color: blueviolet;
 }
 
 ol {
     padding-right: 200px;
     list-style: none;
+    display: flex;
+    flex-direction: column;
 }
 
 #confirm-answer {

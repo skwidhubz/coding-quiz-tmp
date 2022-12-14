@@ -12,6 +12,14 @@ var highScore = document.getElementById("high-score-page"); // high score page
 var clearScores = document.getElementById("clear-button"); // clear high score list
 var returnToBase = document.getElementById("return-button"); // go back to main page
 var confirmAnswerEl = document.getElementById("confirm-answer"); // confirm answer element
+var questionText = document.getElementById("question-text"); // question text element
+var olQuizEl = document.getElementById("quiz-list"); // ordered list element
+var choiceButton1 = document.createElement("button"); // choice button 1
+var choiceButton2 = document.createElement("button"); // choice button 2
+var choiceButton3 = document.createElement("button"); // choice button 3
+var choiceButton4 = document.createElement("button"); // choice button 4
+var startButton = document.getElementById("start-button"); // start button
+
 
 function setTime() { //master quiz timer, color changes as time reduces lower than 10 and 5
     var timerInterval = setInterval(function() {
@@ -53,65 +61,71 @@ function highScoresPage(){
 
 // Q&A's variables
 // each object(q.c.a) has an array INDEX. 0 1 2 3 4
-console.log(questions[1].answer)
 
 var questions = [
      {
        title: 'What case format does JavaScript use?',
        choices: ["Giraffe", "Suit", "Camel", "Eagle"],
-       answer: 2,
+       answer: "Camel",
      },
      {
        title: "What name is commonly used as the first program written in a lanugage?",
        choices: ["Hello There", "OK Computer", "Hello World", "Initialize"],
-       answer: 2,
+       answer: "Hello World",
      },
      {
        title: "A loop is defined by ____ ",
        choices: ["If", "For", "Else", "Loop"],
-       answer: 1,
+       answer: "For",
      },
      {
        title: "We stage using the GIT____ command",
        choices: ["Add", "Push", "Commit", "Init"],
-       answer: 0,
+       answer: "Add",
      },
      {
        title: "JavaScript is what type of language?",
        choices: ["Descriptive", "Imperative", "Objective", "Serif"],
-       answer: 1,
+       answer: "Imperative",
      },
      {
        title: "What is the correct syntax for declaring a variable in JavaScript?",
        choices: ["var myVariable;", "variable myVariable;", "let myVariable;", "const myVariable;"],
-       answer: 0, },]
+       answer: "var myVariable;", 
+    },]
 
-
-var questionText = document.getElementById("question-text"); // question text element
-var olQuizEl = document.getElementById("quiz-list"); // ordered list element
-var choiceButton1 = document.createElement("choice1"); // choice button 1
-var choiceButton2 = document.createElement("choice2"); // choice button 2
-var choiceButton3 = document.createElement("choice3"); // choice button 3
-var choiceButton4 = document.createElement("choice4"); // choice button 4
-var startButton = document.getElementById("start-button"); // start button
 
 let currentQuestion = 0; // current question index
+
+var currentQuestionEl = questions[currentQuestion].title;
+var currentAnswer = questions[currentQuestion].answer;
+
+console.log(questions[1].answer)
 
 function displayQuestions(){ // function to display questions
     console.log("display question and choices");
     questionText.textContent = questions[currentQuestion].title;
     choiceButton1.textContent = questions[currentQuestion].choices[0];
-    choiceButton1.setAttribute("data-answer", questions[currentQuestion].choices[0]);
+    // choiceButton1.setAttribute("data-answer", questions[currentQuestion].choices[0]);
     choiceButton2.textContent = questions[currentQuestion].choices[1];
-    choiceButton2.setAttribute("data-answer", questions[currentQuestion].choices[1]);
+    // choiceButton2.setAttribute("data-answer", questions[currentQuestion].choices[1]);
     choiceButton3.textContent = questions[currentQuestion].choices[2];
-    choiceButton3.setAttribute("data-answer", questions[currentQuestion].choices[2]);
+    // choiceButton3.setAttribute("data-answer", questions[currentQuestion].choices[2]);
     choiceButton4.textContent = questions[currentQuestion].choices[3];
-    choiceButton4.setAttribute("data-answer", questions[currentQuestion].choices[3]);
+//     choiceButton4.setAttribute("data-answer", questions[currentQuestion].choices[3]);
 }
 
-var currentQuestionEl = questions[currentQuestion].title;
-var currentAnswer = questions[currentQuestion].answer;
+// append the choicebuttons to the ordered list 
+
+olQuizEl.appendChild(choiceButton1);
+olQuizEl.appendChild(choiceButton2);
+olQuizEl.appendChild(choiceButton3);
+olQuizEl.appendChild(choiceButton4);
+choiceButton1.setAttribute("id", "q-button1");
+choiceButton2.setAttribute("id", "q-button2");
+choiceButton3.setAttribute("id", "q-button3");
+choiceButton4.setAttribute("id", "q-button4");
+
 
 displayQuestions() // display questions
 
@@ -120,6 +134,20 @@ function nextQuestion(){ // function to move to next question
     displayQuestions()
 }
 
+userClicks()
+
+function checkAnswer(event){
+    console.log("target click")} // function to check answer
+    if(this.target.userClicks === currentAnswer){
+        console.log("correct")}
+    else {console.log("incorrect")}
+
+function userClicks(event){ 
+    choiceButton1.addEventListener('click', function(event) { checkAnswer(event) })
+    choiceButton2.addEventListener('click', function(event) { checkAnswer(event) })
+    choiceButton3.addEventListener('click', function(event) { checkAnswer(event) })
+    choiceButton4.addEventListener('click', function(event) { checkAnswer(event) })
+}
 
 
 

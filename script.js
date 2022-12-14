@@ -137,10 +137,11 @@ function nextQuestion(){ // function to move to next question
 userClicks()
 
 function checkAnswer(event){
-    console.log("target click")} // function to check answer
-    if(this.target.userClicks === currentAnswer){
+    console.log("target click") // function to check answer
+    if(event.target.userClicks === currentAnswer){
         console.log("correct")}
     else {console.log("incorrect")}
+    }
 
 function userClicks(event){ 
     choiceButton1.addEventListener('click', function(event) { checkAnswer(event) })

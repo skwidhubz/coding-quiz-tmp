@@ -1,19 +1,12 @@
 var timerEl = document.getElementById("timer-value") // timer element
 var secondsLeft = 15; // timer starts at 15 seconds
 var highScoresImage = document.getElementById("high-scores-image"); // high scores image
-var questionText = document.getElementById("question-text"); // question text element
-var olEl = document.getElementById("quiz-list"); // ordered list element
-var choiceButton1 = document.getElementById("choice1"); // choice button 1
-var choiceButton2 = document.getElementById("choice2"); // choice button 2
-var choiceButton3 = document.getElementById("choice3"); // choice button 3
-var choiceButton4 = document.getElementById("choice4"); // choice button 4
-var startButton = document.getElementById("start-button"); // start button
 var landingPage = document.getElementById("landing-page"); // landing page
 var quizSection = document.getElementById("quiz-section"); // quiz section
-var li1 = document.getElementById("high-score-list").children[0]; 
-var li2 = document.getElementById("high-score-list").children[1];
-var li3 = document.getElementById("high-score-list").children[2];
-var li4 = document.getElementById("high-score-list").children[3];
+var li1 = document.getElementById("high-score-list").children[0];   
+var li2 = document.getElementById("high-score-list").children[1];   
+var li3 = document.getElementById("high-score-list").children[2];   
+var li4 = document.getElementById("high-score-list").children[3];   
 var highScoreData = localStorage.getItem("score") //score is remaining time.
 var highScore = document.getElementById("high-score-page"); // high score page
 var clearScores = document.getElementById("clear-button"); // clear high score list
@@ -60,6 +53,8 @@ function highScoresPage(){
 
 // Q&A's variables
 // each object(q.c.a) has an array INDEX. 0 1 2 3 4
+console.log(questions[1].answer)
+
 var questions = [
      {
        title: 'What case format does JavaScript use?',
@@ -92,52 +87,42 @@ var questions = [
        answer: 0, },]
 
 
+var questionText = document.getElementById("question-text"); // question text element
+var olQuizEl = document.getElementById("quiz-list"); // ordered list element
+var choiceButton1 = document.createElement("choice1"); // choice button 1
+var choiceButton2 = document.createElement("choice2"); // choice button 2
+var choiceButton3 = document.createElement("choice3"); // choice button 3
+var choiceButton4 = document.createElement("choice4"); // choice button 4
+var startButton = document.getElementById("start-button"); // start button
+
 let currentQuestion = 0; // current question index
 
 function displayQuestions(){ // function to display questions
     console.log("display question and choices");
     questionText.textContent = questions[currentQuestion].title;
     choiceButton1.textContent = questions[currentQuestion].choices[0];
+    choiceButton1.setAttribute("data-answer", questions[currentQuestion].choices[0]);
     choiceButton2.textContent = questions[currentQuestion].choices[1];
+    choiceButton2.setAttribute("data-answer", questions[currentQuestion].choices[1]);
     choiceButton3.textContent = questions[currentQuestion].choices[2];
+    choiceButton3.setAttribute("data-answer", questions[currentQuestion].choices[2]);
     choiceButton4.textContent = questions[currentQuestion].choices[3];
+    choiceButton4.setAttribute("data-answer", questions[currentQuestion].choices[3]);
 }
 
-displayQuestions()
+var currentQuestionEl = questions[currentQuestion].title;
+var currentAnswer = questions[currentQuestion].answer;
+
+displayQuestions() // display questions
 
 function nextQuestion(){ // function to move to next question
     currentQuestion++
     displayQuestions()
 }
 
-userClicks()
 
-function userClicks(event){ 
-    choiceButton1.addEventListener('click', function(event) { checkAnswer() })
-    choiceButton2.addEventListener('click', function(event) { checkAnswer() })
-    choiceButton3.addEventListener('click', function(event) { checkAnswer() })
-    choiceButton4.addEventListener('click', function(event) { checkAnswer() })
-}
 
-var answerEl = questions[currentQuestion].answer;
-var choiceClicks = document.getElementById("quiz-list").children;
 
-function checkAnswer(event){ // function to check answer
-
-    console.log("check answer");
-    event.choiceClicks
-    if (choiceClicks === answerEl) {
-        console.log("correct")
-        secondsLeft = secondsLeft + 5;
-        confirmAnswerEl.textContent = "Correct!"
-        nextQuestion()
-    } else {
-        console.log("wrong")
-        secondsLeft = secondsLeft - 5;
-        confirmAnswerEl.textContent = "Wrong!"
-        nextQuestion()
-    }
-}
 
 // QUIZ COMPLETE
 // find score - setItem("score", "data")

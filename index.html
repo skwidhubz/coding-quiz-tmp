@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./assets/style.css">
     <title>Coding Quiz - T.Parker FS-Bootcamp</title>
 </head>
 <body>
@@ -12,16 +12,16 @@
     <section class="top-section">
         <section class="header-top">
             <aside class="left-aside">
-            <a href="#high-scores"><img src="./assets/high-scores.png" height="31" width="271.50" id="high-scores-image"></a>
+            <a href="#high-scores"><img src="./assets/images/high-scores.png" height="31" width="271.50" id="high-scores-image"></a>
             </aside>
 
             <section class="center-top">
-                <img src="./assets/quiz-banner.png" height="129" width="465">
+                <img src="./assets/images/quiz-banner.png" height="129" width="465">
             </section>
 
 
             <aside class="right-aside">
-                <img src="./assets/timer-logo.png" height="60" width="200">
+                <img src="./assets/images/timer-logo.png" height="60" width="200">
                 <div id="timer-value">-</div>
             </aside>
         </section>
@@ -53,18 +53,30 @@
         <div id="confirm-answer"></div>
     </div>
 
-    <div id="high-score-page">
-        <h1>✨ Leaderboard ✨</h1>
-        <ol id="high-score-list">
+    <div id="end-quiz-page">
 
+        <h1 id="end-quiz-title">🏁 Quiz Complete 🏁</h1>
+        <p>
+            Your score is: <span id="final-score"></span>
+        </p>
 
-            
-        </ol>
         <form id="name-box">
             <label for="name">Enter your name:</label>
             <input type="text" id="name" name="name">
             <input type="submit" value="Submit" id="submit-button">
         </form>
+
+
+    </div>
+
+    <div id="high-score-page">
+        <h1>✨ Leaderboard ✨</h1>
+        <ol id="high-score-list">
+
+
+
+        </ol>
+
         <hr>
         <button id="clear-button">Clear Scores ⚠️</button>
         <button id="return-button">Return to base 🏠</button>
@@ -73,6 +85,6 @@
 </section>
 <!-- </div> -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="./script.js" async></script>
+<script src="./assets/script.js" async></script>
 </body>
 </html>

@@ -165,7 +165,12 @@ body {
 
 #quiz-section .q-button {
     color: white;
-    background-color: blueviolet;
+    background-color: rgb(165, 69, 255);
+    border: 5px;
+    border-style: solid;
+    border-color: rgb(250, 62, 209);
+    padding: 8px;
+    margin: 4px;
 }
 
 ol {

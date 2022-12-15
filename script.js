@@ -7,7 +7,7 @@ var li1 = document.getElementById("high-score-list").children[0];
 var li2 = document.getElementById("high-score-list").children[1];
 var li3 = document.getElementById("high-score-list").children[2];
 var li4 = document.getElementById("high-score-list").children[3];
-var highScoreData = localStorage.getItem("score") //score is remaining time.
+// var highScoreData = localStorage.getItem("score") //score is remaining time.
 var highScore = document.getElementById("high-score-page"); // high score page
 var clearScores = document.getElementById("clear-button"); // clear high score list
 var returnToBase = document.getElementById("return-button"); // go back to main page
@@ -16,7 +16,7 @@ var questionText = document.getElementById("question-text"); // question text el
 var olQuizEl = document.getElementById("quiz-list"); // ordered list element
 var choiceButtons = document.querySelectorAll(".q-button"); // choice buttons
 var startButton = document.getElementById("start-button"); // start button
-
+var submitButtonEl = document.getElementById("submit-button"); // submit button
 
 
 function setTime() { //master quiz timer, color changes as time reduces lower than 10 and 5
@@ -33,8 +33,8 @@ function setTime() { //master quiz timer, color changes as time reduces lower th
             timerEl.setAttribute("style", "color: red");
         }
         if (secondsLeft <= 0) {
-            clearInterval(timerInterval);
             gameOver() //function to end quiz
+            clearInterval(timerInterval);
         }
     }, 1000);
 }
@@ -43,18 +43,19 @@ startButton.addEventListener('click', startGame) // start button event listener
 
 
 function startGame() { // start game function
-    let highScoreData = localStorage.getItem("score")
+    let highScoreData = localStorage.getItem("score");
     currentQuestion = 0;
-    setTime()
+    setTime() // start timer
     console.log("startgame");
-    landingPage.setAttribute("style", "display: none;")
-    quizSection.setAttribute("style", "display: flex;")
+    landingPage.setAttribute("style", "display: none;");
+    quizSection.setAttribute("style", "display: flex;");
+    highScore.setAttribute("style", "display: none;");
 }
 
 highScoresImage.addEventListener('click', highScoresPage) // high scores image event listener
 
 function highScoresPage() {
-    gameOver()
+    gameOver() // function to end quiz
     landingPage.setAttribute("style", "display: none;")
     quizSection.setAttribute("style", "display: none;")
     highScore.setAttribute("style", "display: flex;")
@@ -95,23 +96,22 @@ var questions = [
         answer: "var myVariable;",
     },]
 
-
 let currentQuestion = 0; // current question index
 
-var currentQuestionEl = questions[currentQuestion].title;
-var currentAnswer = questions[currentQuestion].answer;
-
+var currentQuestionEl = questions[currentQuestion].title; // current question Element
+var currentAnswer; // questions[currentQuestion].answer; // current answer
 
 function displayQuestions() { // function to display questions
     console.log("display question and choices");
+    currentAnswer = questions[currentQuestion].answer; // current answer
     questionText.textContent = questions[currentQuestion].title;
 
-    for (var i = 0; i < choiceButtons.length; i++){
-        console.log(currentAnswer)
+    for (var i = 0; i < choiceButtons.length; i++){ // loop to display choices
+        console.log(currentAnswer) //checking current answer is the right string
         choiceButtons[i].textContent = questions[currentQuestion].choices[i];
     }
-    if (currentQuestion == 5) {
-        gameOver()
+    if (currentQuestion == 5) { // if last question, end quiz
+        gameOver() // function to end quiz
     }
 }
 
@@ -125,8 +125,8 @@ function nextQuestion() { // function to move to next question
 function checkAnswer(event) {    // function to check answer
 
     var userChoice = event.target;
-    // console.log("target click")
-    // console.log(userChoice)
+    console.log("target click")
+    console.log(userChoice)
 
     if (userChoice.textContent == currentAnswer) {
         console.log("correct")
@@ -145,7 +145,6 @@ for (var i = 0; i < choiceButtons.length; i++){
     choiceButtons[i].addEventListener('click', function (event) {
         checkAnswer(event)})
 }
-
 
 // QUIZ COMPLETE
 // find score - setItem("score", "data")
@@ -167,31 +166,39 @@ function gameOver() {
 // gets data from quiz score, stored in localStorage, and displays highest value first. 
 
 let highScoreArray = [];
+submitButtonEl.addEventListener("click", addNameListEl)
+returnToBase.addEventListener("click", startGame);
+clearScores.addEventListener("click", clearHighScores);
+var nameInput = document.getElementById("name")
+var highScoreListLi = document.createElement("li");
 
 function highScoreKeeper() {
     console.log(highScoreData);
-    var highScoreList = document.getElementById("high-score-list");
+    var highScoreListEl = document.getElementById("high-score-list");
 
     for (i = 0; i < highScoreArray.length; i++){
-    var highScoreListEl = document.createElement("li");
-    highScoreListEl.textContent = highScoreData;
-    highScoreList.appendChild(highScoreListEl);
+    highScoreListLi.textContent = highScoreData;
+    highScoreListEl.appendChild(highScoreListLi);
+    addNameListEl()
     }
 }
 
-// highScoreData is stored locally.
-
-returnToBase.addEventListener("click", restartGame);
-clearScores.addEventListener("click", clearHighScores);
-
-function restartGame() {
-    highScore.setAttribute("style", "display: none;")
-    landingPage.setAttribute("style", "display: flex;")
-    secondsLeft = 15;
+function addNameListEl () {
+    console.log("submit button clicked");
+    let nameListEl = document.createElement("li");
+    nameListEl.textContent = nameInput.value;
+    highScoreListEl.appendChild(nameListEl);
+    // highScoreArray.push(nameInput.value);
+    // console.log(highScoreArray);
+    // localStorage.setItem("score", highScoreArray);
 }
+
+// function restartGame() {
+//     highScore.setAttribute("style", "display: none;")
+//     landingPage.setAttribute("style", "display: flex;")
+//     secondsLeft = 15;
+// }
 
 function clearHighScores() {
     localStorage.clear();
 }
-
-

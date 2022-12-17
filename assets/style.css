@@ -22,6 +22,8 @@ body {
     background-attachment: fixed;
 }
 
+/* !!! HEADER AND ASIDE SECTIONS !!! */
+
 .header-top {
     display: flex;
     flex-direction: row;
@@ -119,6 +121,15 @@ body {
     padding: 20px;
 }
 
+#start-button {
+    border-radius: 5px;
+    margin:0 0 10px 0; 
+    padding: 15px;
+    color: white;
+    font-size: larger;
+    background-color: rgb(67, 177, 85);
+}
+
 /* !!! QUIZ PAGE SECTION !!!  */
 
 #quiz-section {
@@ -182,13 +193,15 @@ ol {
 
 #confirm-answer {
     padding: 10px;
-    padding-bottom: 30px;
+    /* padding-bottom: 30px; */
+    background-color: rgba(137, 43, 226, 0.5);
+    text-align: end;
 }
 
 /* !!! END QUIZ PAGE SECTION !!!  */
 
 #end-quiz-page {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
 }

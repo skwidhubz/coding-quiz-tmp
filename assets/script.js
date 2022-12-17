@@ -1,5 +1,5 @@
 var timerEl = document.getElementById("timer-value") // timer element
-var secondsLeft = 50; // timer starts at 15 seconds
+var secondsLeft = 20; // timer starts at 15 seconds
 var highScoresImage = document.getElementById("high-scores-image"); // high scores image
 var landingPage = document.getElementById("landing-page"); // landing page
 var quizSection = document.getElementById("quiz-section"); // quiz section
@@ -7,7 +7,6 @@ var li1 = document.getElementById("high-score-list").children[0];
 var li2 = document.getElementById("high-score-list").children[1];
 var li3 = document.getElementById("high-score-list").children[2];
 var li4 = document.getElementById("high-score-list").children[3];
-// var highScoreData = localStorage.getItem("score") //score is remaining time.
 var highScore = document.getElementById("high-score-page"); // high score page
 var clearScores = document.getElementById("clear-button"); // clear high score list
 var endQuizPage = document.getElementById("end-quiz-page"); // end quiz page
@@ -20,9 +19,11 @@ var startButton = document.getElementById("start-button"); // start button
 var submitButtonEl = document.getElementById("submit-button"); // submit button
 var finalScoreEl = document.getElementById("final-score"); // final score element
 var timerInterval
+var currentScore = 0; // user score flux variable
+
 
 function setTime() { //master quiz timer, color changes as time reduces lower than 10 and 5
-
+        // secondsLeft = 50;
         secondsLeft--;
         timerEl.textContent = secondsLeft;
         if (secondsLeft > 11) {
@@ -44,11 +45,9 @@ startButton.addEventListener('click', startGame) // start button event listener
 
 
 function startGame() { // start game function
-    // let highScoreData = localStorage.getItem("score");
+    console.log("startgame");
     currentQuestion = 0;
     timerInterval = setInterval(setTime, 1000) // start timer
-    // setTime() // start timer
-    console.log("startgame");
     landingPage.setAttribute("style", "display: none;");
     quizSection.setAttribute("style", "display: flex;");
     highScore.setAttribute("style", "display: none;");
@@ -68,7 +67,7 @@ function highScoresPage() {
 // Q&A's variables
 // each object(q.c.a) has an array INDEX. 0 1 2 3 4
 
-var questions = [
+var questions = [ // array of objects with questions/choices/answer
     {
         title: 'What case format does JavaScript use?',
         choices: ["Giraffe", "Suit", "Camel", "Eagle"],
@@ -130,19 +129,23 @@ function nextQuestion() { // function to move to next question
 function checkAnswer(event) {    // function to check answer
 
     var userChoice = event.target;
-    console.log("target click")
-    console.log(userChoice)
+    console.log("target click") // check button/selection clicked
+    
 
     if (userChoice.textContent == currentAnswer) {
         console.log("correct")
         document.querySelector("#confirm-answer").textContent = "Correct! 😃"
+        currentScore = currentScore + 2;
         secondsLeft = secondsLeft + 5;
     }
     else {
         console.log("wrong")
         document.querySelector("#confirm-answer").textContent = "Wrong! ☹️"
+        currentScore = currentScore - 1;
         secondsLeft = secondsLeft - 5;
     }
+    console.log(currentScore) // current user score
+
     nextQuestion()
 }
 
@@ -153,45 +156,41 @@ for (var i = 0; i < choiceButtons.length; i++){
 
 // QUIZ COMPLETE
 // find score - setItem("score", "data")
-// enter name: text box and button
+// enter name: text box and sumbit button
 // click button and then highscores page appears feat goback or clear high scores buttons
 
-var score = [];
-
-function gameOver() {
-    // localStorage.setItem("score", score)
-    if (secondsLeft >= 0) {
-        var timeRemaing = secondsLeft;
-    }
-        finalScoreEl.textContent = timeRemaing;
+function gameOver() { // game over function - end game and move to endquiz page
+        finalScoreEl.textContent = currentScore;
         timerEl.setAttribute("style", "color: blue");
         timerEl.textContent = "Game Over!";
         quizSection.setAttribute("style", "display: none;");
         highScore.setAttribute("style", "display: none;");
         endQuizPage.setAttribute("style", "display: flex;");
-
 }
 
+submitButtonEl.addEventListener('click', submitClick()) // click submit to save score
 
-submitButtonEl.addEventListener('click', addScore())
-
-function addScore(){
+function submitClick(){ // save user score and name
+    console.log(secondsLeft)
     console.log("click submit")
-    // document.localStorage("score", timeRemaing)
-    quizSection.setAttribute("style", "display: none;");
+    localStorage.setItem("score", currentScore)
     landingPage.setAttribute("style", "display: none;");
     quizSection.setAttribute("style", "display: none;");
     endQuizPage.setAttribute("style", "display: none;");
     highScore.setAttribute("style", "display: flex;");
 
+
+    // quizSection.setAttribute("style", "display: none;");
+    // landingPage.setAttribute("style", "display: none;");
+    // quizSection.setAttribute("style", "display: none;");
+    // endQuizPage.setAttribute("style", "display: none;");
+    // highScore.setAttribute("style", "display: flex;");
+
 }
 
-
 // HIGH SCORE KEEPER
-// high score record keeper
-// gets data from quiz score, stored in localStorage, and displays highest value first. 
 
-let highScoreArray = [];
+var highScoreArray = []; // array to store highscores
 
 submitButtonEl.addEventListener("click", addNameListEl)
 returnToBase.addEventListener("click", returnToMain);
@@ -200,13 +199,14 @@ clearScores.addEventListener("click", clearHighScores);
 var nameInput = document.getElementById("name")
 var highScoreListLi = document.createElement("li");
 
-function returnToMain() {
+function returnToMain() { // return to main landing-page
     landingPage.setAttribute("style", "display: flex;");
     quizSection.setAttribute("style", "display: none;");
     highScore.setAttribute("style", "display: none;");
+    endQuizPage.setAttribute("style", "display: none;");
 }
 
-function highScoreKeeper() {
+function highScoreKeeper() { // highscore keeper function (local storage)
     console.log(highScoreData);
     var highScoreListEl = document.getElementById("high-score-list");
 
@@ -217,7 +217,7 @@ function highScoreKeeper() {
     }
 }
 
-function addNameListEl () {
+function addNameListEl () { // sumbit name and score
     console.log("submit button clicked");
 //     let nameListEl = document.createElement("li");
 //     nameListEl.textContent = nameInput.value;

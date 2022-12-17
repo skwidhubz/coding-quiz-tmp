@@ -168,12 +168,19 @@ function gameOver() { // game over function - end game and move to endquiz page
         endQuizPage.setAttribute("style", "display: flex;");
 }
 
-submitButtonEl.addEventListener('click', submitClick()) // click submit to save score
+submitButtonEl.addEventListener('click', submitClick) // click submit to save score
+
+var nameInput = document.getElementById("name")
+
+var highscores =  	JSON.parse(window.localStorage.getItem('highscores')) || [];
+var newScore = {  	score: currentScore,  	initials: nameInput,	};
+
 
 function submitClick(){ // save user score and name
     console.log(secondsLeft)
     console.log("click submit")
-    localStorage.setItem("score", currentScore)
+    highscores.push(newScore);
+    window.localStorage.setItem('highscores', JSON.stringify(newScore));
     landingPage.setAttribute("style", "display: none;");
     quizSection.setAttribute("style", "display: none;");
     endQuizPage.setAttribute("style", "display: none;");
@@ -190,13 +197,14 @@ function submitClick(){ // save user score and name
 
 // HIGH SCORE KEEPER
 
-var highScoreArray = []; // array to store highscores
+// var highScoreArray = []; // array to store highscores
 
-submitButtonEl.addEventListener("click", addNameListEl)
+
+
 returnToBase.addEventListener("click", returnToMain);
 clearScores.addEventListener("click", clearHighScores);
 
-var nameInput = document.getElementById("name")
+
 var highScoreListLi = document.createElement("li");
 
 function returnToMain() { // return to main landing-page
@@ -206,16 +214,20 @@ function returnToMain() { // return to main landing-page
     endQuizPage.setAttribute("style", "display: none;");
 }
 
-function highScoreKeeper() { // highscore keeper function (local storage)
-    console.log(highScoreData);
-    var highScoreListEl = document.getElementById("high-score-list");
+// function highScoreKeeper() { // highscore keeper function (local storage)
+//     console.log(highScoreData);
+//     var highScoreListEl = document.getElementById("high-score-list");
 
-    for (i = 0; i < highScoreArray.length; i++){
-    highScoreListLi.textContent = highScoreData;
-    highScoreListEl.appendChild(highScoreListLi);
-    // addNameListEl()
-    }
-}
+//     for (i = 0; i < highScoreArray.length; i++){
+//     highScoreListLi.textContent = highScoreData;
+//     highScoreListEl.appendChild(highScoreListLi);
+//     // addNameListEl()
+//     }
+// }
+
+// !!! append highscore and name to the highscore list
+
+// submitButtonEl.addEventListener("click", addNameListEl)
 
 function addNameListEl () { // sumbit name and score
     console.log("submit button clicked");
@@ -235,4 +247,5 @@ function addNameListEl () { // sumbit name and score
 
 function clearHighScores() {
     localStorage.clear();
+
 }

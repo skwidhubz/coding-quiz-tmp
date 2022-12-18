@@ -172,7 +172,6 @@ function gameOver() { // game over function - end game and move to endquiz page
 // push the updated highScoreArray to local storage
 // pull the highscore data and plus to highScoreArray
 
-
 submitButtonEl.addEventListener('click', submitClick) // click submit to save score
 // var newScore = nameInput + currentScore; // combing name and current score 
 // var highScores = [] + newScore;
@@ -187,15 +186,18 @@ function submitClick(){ // save user score and name
     quizSection.setAttribute("style", "display: none;");
     endQuizPage.setAttribute("style", "display: none;");
     highScore.setAttribute("style", "display: flex;");
-
 }
+
+// Save to local storage function
+
+// Get the name input from the text box
+ var nameInput = document.getElementById("nameInput").value;  
+// Save the name and decimal value to local storage
+var highScores = JSON.parse(localStorage.getItem("highScores")) || []
+
 
 function saveToLocalStorage() { // save score to local storage
     event.preventDefault();
-    // Get the name input from the text box
-    var nameInput = document.getElementById("nameInput").value;  
-    // Save the name and decimal value to local storage
-    var highScores = localStorage.getItem("highScores") || []
 
     let tempScoreObj = {
       name : nameInput,
@@ -204,7 +206,7 @@ function saveToLocalStorage() { // save score to local storage
     
     highScores.push(tempScoreObj)
     
-    localStorage.setItem("highScores", JSON.stringify(highScores)) 
+    localStorage.setItem("highScores", JSON.stringify(highScores))
   }
 
 // HIGH SCORE KEEPER!
@@ -212,20 +214,25 @@ function saveToLocalStorage() { // save score to local storage
 returnToBase.addEventListener("click", returnToMain);
 clearScores.addEventListener("click", clearHighScores);
 
-var highScoreListLi = document.createElement("li");
+
 // Get high-score data from local-storage
 var highScoreEl = JSON.parse(localStorage.getItem("highScores"));
 
-function highScoreKeeper() { // highscore keeper function (local storage)
-    console.log(highScoreData);
-    var highScoreListEl = document.getElementById("high-score-list");
+highScoreKeeper()
 
-    for (i = 0; i < highScoreArray.length; i++){
-    highScoreListLi.textContent = highScoreData;
+function highScoreKeeper() { // highscore keeper function (local storage)
+    var highScores = JSON.parse(highScores);
+    var highScoreListEl = document.getElementById("high-score-list");
+    if (highScores !=null){
+    for (var i = 0; i < highScores.length; i++){
+    var highScoreListLi = document.createElement("li");
     highScoreListEl.appendChild(highScoreListLi);
-    // addNameListEl()
-    }
+    highScoreListLi.textContent = highScoreEl[i];
+    }}
 }
+
+
+
 
 function returnToMain() { // return to main landing-page
     landingPage.setAttribute("style", "display: flex;");

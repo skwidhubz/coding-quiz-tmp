@@ -178,11 +178,11 @@ submitButtonEl.addEventListener('click', submitClick) // click submit to save sc
 // var highScores = [] + newScore;
 
 function submitClick(){ // save user score and name
-    event.preventDefault();
+    
     console.log(secondsLeft)
     console.log("click submit")
     // highScores.setItem(newScore);
-    saveToLocalStorage
+    saveToLocalStorage()
     landingPage.setAttribute("style", "display: none;");
     quizSection.setAttribute("style", "display: none;");
     endQuizPage.setAttribute("style", "display: none;");
@@ -191,6 +191,7 @@ function submitClick(){ // save user score and name
 }
 
 function saveToLocalStorage() { // save score to local storage
+    event.preventDefault();
     // Get the name input from the text box
     var nameInput = document.getElementById("nameInput").value;  
     // Save the name and decimal value to local storage

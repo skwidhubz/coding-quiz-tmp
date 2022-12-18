@@ -21,7 +21,6 @@ var finalScoreEl = document.getElementById("final-score"); // final score elemen
 var timerInterval
 var currentScore = 0; // user score flux variable
 
-
 function setTime() { //master quiz timer, color changes as time reduces lower than 10 and 5
         // secondsLeft = 50;
         secondsLeft--;
@@ -42,7 +41,6 @@ function setTime() { //master quiz timer, color changes as time reduces lower th
     }
 
 startButton.addEventListener('click', startGame) // start button event listener
-
 
 function startGame() { // start game function
     console.log("startgame");
@@ -168,44 +166,58 @@ function gameOver() { // game over function - end game and move to endquiz page
         endQuizPage.setAttribute("style", "display: flex;");
 }
 
+// take the name and combine with the score
+// update the internal variable
+// combine the name + score with the highScoreArray
+// push the updated highScoreArray to local storage
+// pull the highscore data and plus to highScoreArray
+
+
 submitButtonEl.addEventListener('click', submitClick) // click submit to save score
-
-var nameInput = document.getElementById("name")
-
-var highscores =  	JSON.parse(window.localStorage.getItem('highscores')) || [];
-var newScore = {  	score: currentScore,  	initials: nameInput,	};
-
+// var newScore = nameInput + currentScore; // combing name and current score 
+// var highScores = [] + newScore;
 
 function submitClick(){ // save user score and name
+    event.preventDefault();
     console.log(secondsLeft)
     console.log("click submit")
-    highscores.push(newScore);
-    window.localStorage.setItem('highscores', JSON.stringify(newScore));
+    // highScores.setItem(newScore);
+    saveToLocalStorage
     landingPage.setAttribute("style", "display: none;");
     quizSection.setAttribute("style", "display: none;");
     endQuizPage.setAttribute("style", "display: none;");
     highScore.setAttribute("style", "display: flex;");
 
-
-    // quizSection.setAttribute("style", "display: none;");
-    // landingPage.setAttribute("style", "display: none;");
-    // quizSection.setAttribute("style", "display: none;");
-    // endQuizPage.setAttribute("style", "display: none;");
-    // highScore.setAttribute("style", "display: flex;");
-
 }
 
+function saveToLocalStorage() { // save score to local storage
+    // Get the name input from the text box
+    var nameInput = document.getElementById("nameInput").value;  
+    // Save the name and decimal value to local storage
+    localStorage.setItem("name", nameInput);
+    localStorage.setItem("score", currentScore);
+  }
+
 // HIGH SCORE KEEPER
-
-// var highScoreArray = []; // array to store highscores
-
-
 
 returnToBase.addEventListener("click", returnToMain);
 clearScores.addEventListener("click", clearHighScores);
 
-
 var highScoreListLi = document.createElement("li");
+// Get high-score data from local-storage
+var nameOutput = localStorage.getItem("name"); 
+var highScoreEl = localStorage.getItem("score");
+
+function highScoreKeeper() { // highscore keeper function (local storage)
+    console.log(highScoreData);
+    var highScoreListEl = document.getElementById("high-score-list");
+
+    for (i = 0; i < highScoreArray.length; i++){
+    highScoreListLi.textContent = highScoreData;
+    highScoreListEl.appendChild(highScoreListLi);
+    // addNameListEl()
+    }
+}
 
 function returnToMain() { // return to main landing-page
     landingPage.setAttribute("style", "display: flex;");
@@ -214,38 +226,8 @@ function returnToMain() { // return to main landing-page
     endQuizPage.setAttribute("style", "display: none;");
 }
 
-// function highScoreKeeper() { // highscore keeper function (local storage)
-//     console.log(highScoreData);
-//     var highScoreListEl = document.getElementById("high-score-list");
-
-//     for (i = 0; i < highScoreArray.length; i++){
-//     highScoreListLi.textContent = highScoreData;
-//     highScoreListEl.appendChild(highScoreListLi);
-//     // addNameListEl()
-//     }
-// }
-
-// !!! append highscore and name to the highscore list
-
-// submitButtonEl.addEventListener("click", addNameListEl)
-
-function addNameListEl () { // sumbit name and score
-    console.log("submit button clicked");
-//     let nameListEl = document.createElement("li");
-//     nameListEl.textContent = nameInput.value;
-//     highScoreListEl.appendChild(nameListEl);
-    // highScoreArray.push(nameInput.value);
-    // console.log(highScoreArray);
-    // localStorage.setItem("score", highScoreArray);
-}
-
-// function restartGame() {
-//     highScore.setAttribute("style", "display: none;")
-//     landingPage.setAttribute("style", "display: flex;")
-//     secondsLeft = 15;
-// }
-
 function clearHighScores() {
     localStorage.clear();
+    // clear the high score list
 
 }

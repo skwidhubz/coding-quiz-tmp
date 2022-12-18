@@ -236,6 +236,10 @@ ol {
     height: 40px;
 }
 
+.text-box-input {
+    color: black;
+}
+
 #submit-button {
 
     background-color: cornflowerblue;

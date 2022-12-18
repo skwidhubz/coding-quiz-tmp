@@ -191,14 +191,15 @@ function submitClick(){ // save user score and name
 // Save to local storage function
 
 // Get the name input from the text box
- var nameInput = document.getElementById("nameInput").value;  
+
 // Save the name and decimal value to local storage
 var highScores = JSON.parse(localStorage.getItem("highScores")) || []
 
 
 function saveToLocalStorage() { // save score to local storage
     event.preventDefault();
-
+    var nameInput = document.getElementById("nameInput").value;  
+    // console.log("savestoragefunc");
     let tempScoreObj = {
       name : nameInput,
       score : currentScore
@@ -221,7 +222,7 @@ var highScoreEl = JSON.parse(localStorage.getItem("highScores"));
 highScoreKeeper()
 
 function highScoreKeeper() { // highscore keeper function (local storage)
-    var highScores = JSON.parse(highScores);
+    // var highScores = JSON.parse(highScores);
     var highScoreListEl = document.getElementById("high-score-list");
     if (highScores !=null){
     for (var i = 0; i < highScores.length; i++){

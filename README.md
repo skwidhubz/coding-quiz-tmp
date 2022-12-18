@@ -1,6 +1,10 @@
 # Coding Quiz!
 A timer based quiz built with js/css &amp; html
 
+Deployed application link:
+
+
+
 Start the game by clicking "Engage!" button on the main page.
 
 A correct answer will gain 2 points and 5 seconds, an inccorect answer will lose 1 point and 5 seconds.

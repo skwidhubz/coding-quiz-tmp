@@ -3,7 +3,7 @@ A timer based quiz built with js/css &amp; html
 
 Deployed application link:
 
-
+https://skwidhubz.github.io/coding-quiz-tmp/index
 
 Start the game by clicking "Engage!" button on the main page.
 

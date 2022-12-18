@@ -1,4 +1,4 @@
-# coding-quiz-tmp
+# Coding Quiz!
 A timer based quiz built with js/css &amp; html
 
 Start the game by clicking "Engage!" button on the main page.

@@ -3,10 +3,6 @@ var secondsLeft = 20; // timer starts at 15 seconds
 var highScoresImage = document.getElementById("high-scores-image"); // high scores image
 var landingPage = document.getElementById("landing-page"); // landing page
 var quizSection = document.getElementById("quiz-section"); // quiz section
-var li1 = document.getElementById("high-score-list").children[0];
-var li2 = document.getElementById("high-score-list").children[1];
-var li3 = document.getElementById("high-score-list").children[2];
-var li4 = document.getElementById("high-score-list").children[3];
 var highScore = document.getElementById("high-score-page"); // high score page
 var clearScores = document.getElementById("clear-button"); // clear high score list
 var endQuizPage = document.getElementById("end-quiz-page"); // end quiz page
@@ -22,7 +18,6 @@ var timerInterval
 var currentScore = 0; // user score flux variable
 
 function setTime() { //master quiz timer, color changes as time reduces lower than 10 and 5
-        // secondsLeft = 50;
         secondsLeft--;
         timerEl.textContent = secondsLeft;
         if (secondsLeft > 11) {
@@ -43,7 +38,6 @@ function setTime() { //master quiz timer, color changes as time reduces lower th
 startButton.addEventListener('click', startGame) // start button event listener
 
 function startGame() { // start game function
-    console.log("startgame");
     currentQuestion = 0;
     timerInterval = setInterval(setTime, 1000) // start timer
     landingPage.setAttribute("style", "display: none;");
@@ -98,24 +92,20 @@ var questions = [ // array of objects with questions/choices/answer
     },]
 
 let currentQuestion = 0; // current question index
-
 var currentQuestionEl = questions[currentQuestion].title; // current question Element
 var currentAnswer; // questions[currentQuestion].answer; // current answer
 
 function displayQuestions() { // function to display questions
-    console.log("display question and choices");
     currentAnswer = questions[currentQuestion].answer; // current answer
     questionText.textContent = questions[currentQuestion].title;
 
     for (var i = 0; i < choiceButtons.length; i++){ // loop to display choices
-        console.log(currentAnswer) //checking current answer is the right string
         choiceButtons[i].textContent = questions[currentQuestion].choices[i];
     }
     if (currentQuestion == 5) { // if last question, end quiz
         gameOver() // function to end quiz
         clearInterval(timerInterval);
-    }
-}
+    }}
 
 displayQuestions() // display questions
 
@@ -125,25 +115,17 @@ function nextQuestion() { // function to move to next question
 }
 
 function checkAnswer(event) {    // function to check answer
-
     var userChoice = event.target;
-    console.log("target click") // check button/selection clicked
-    
-
     if (userChoice.textContent == currentAnswer) {
-        console.log("correct")
         document.querySelector("#confirm-answer").textContent = "Correct! 😃"
         currentScore = currentScore + 2;
         secondsLeft = secondsLeft + 5;
     }
     else {
-        console.log("wrong")
         document.querySelector("#confirm-answer").textContent = "Wrong! ☹️"
         currentScore = currentScore - 1;
         secondsLeft = secondsLeft - 5;
     }
-    console.log(currentScore) // current user score
-
     nextQuestion()
 }
 
@@ -151,11 +133,6 @@ for (var i = 0; i < choiceButtons.length; i++){
     choiceButtons[i].addEventListener('click', function (event) {
         checkAnswer(event)})
 }
-
-// QUIZ COMPLETE
-// find score - setItem("score", "data")
-// enter name: text box and sumbit button
-// click button and then highscores page appears feat goback or clear high scores buttons
 
 function gameOver() { // game over function - end game and move to endquiz page
         finalScoreEl.textContent = currentScore;
@@ -166,74 +143,46 @@ function gameOver() { // game over function - end game and move to endquiz page
         endQuizPage.setAttribute("style", "display: flex;");
 }
 
-// take the name and combine with the score
-// update the internal variable
-// combine the name + score with the highScoreArray
-// push the updated highScoreArray to local storage
-// pull the highscore data and plus to highScoreArray
-
 submitButtonEl.addEventListener('click', submitClick) // click submit to save score
-// var newScore = nameInput + currentScore; // combing name and current score 
-// var highScores = [] + newScore;
 
 function submitClick(){ // save user score and name
-    
-    console.log(secondsLeft)
-    console.log("click submit")
-    // highScores.setItem(newScore);
-    saveToLocalStorage()
+    saveToLocalStorage() // Save to local storage function
     landingPage.setAttribute("style", "display: none;");
     quizSection.setAttribute("style", "display: none;");
     endQuizPage.setAttribute("style", "display: none;");
     highScore.setAttribute("style", "display: flex;");
 }
 
-// Save to local storage function
 
-// Get the name input from the text box
-
-// Save the name and decimal value to local storage
 var highScores = JSON.parse(localStorage.getItem("highScores")) || []
 
-
 function saveToLocalStorage() { // save score to local storage
-    event.preventDefault();
     var nameInput = document.getElementById("nameInput").value;  
-    // console.log("savestoragefunc");
     let tempScoreObj = {
-      name : nameInput,
+      name : nameInput, 
       score : currentScore
     }
-    
-    highScores.push(tempScoreObj)
-    
+    highScores.push(tempScoreObj) 
     localStorage.setItem("highScores", JSON.stringify(highScores))
   }
 
 // HIGH SCORE KEEPER!
+returnToBase.addEventListener("click", returnToMain); //button to return to landing page
+clearScores.addEventListener("click", clearHighScores); //clear high scores list and local storage
 
-returnToBase.addEventListener("click", returnToMain);
-clearScores.addEventListener("click", clearHighScores);
-
-
-// Get high-score data from local-storage
-var highScoreEl = JSON.parse(localStorage.getItem("highScores"));
+var highScoreEl = JSON.parse(localStorage.getItem("highScores")) || [];
 
 highScoreKeeper()
 
 function highScoreKeeper() { // highscore keeper function (local storage)
-    // var highScores = JSON.parse(highScores);
     var highScoreListEl = document.getElementById("high-score-list");
-    if (highScores !=null){
-    for (var i = 0; i < highScores.length; i++){
+    if (highScoreEl !=null){
+    for (var i = 0; i < highScoreEl.length; i++){
     var highScoreListLi = document.createElement("li");
+    highScoreListLi.textContent = highScoreEl[i].name + ": " + highScoreEl[i].score;
     highScoreListEl.appendChild(highScoreListLi);
-    highScoreListLi.textContent = highScoreEl[i];
     }}
 }
-
-
-
 
 function returnToMain() { // return to main landing-page
     landingPage.setAttribute("style", "display: flex;");
@@ -242,8 +191,10 @@ function returnToMain() { // return to main landing-page
     endQuizPage.setAttribute("style", "display: none;");
 }
 
-function clearHighScores() {
+function clearHighScores() { // clear high scores
     localStorage.clear();
-    // clear the high score list
-
+    var highScoreListEl = document.getElementById("high-score-list");
+    while (highScoreListEl.hasChildNodes()) {
+        highScoreListEl.removeChild(highScoreListEl.firstChild);
+      }
 }

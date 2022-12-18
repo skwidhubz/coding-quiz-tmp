@@ -195,19 +195,26 @@ function saveToLocalStorage() { // save score to local storage
     // Get the name input from the text box
     var nameInput = document.getElementById("nameInput").value;  
     // Save the name and decimal value to local storage
-    localStorage.setItem("name", nameInput);
-    localStorage.setItem("score", currentScore);
+    var highScores = localStorage.getItem("highScores") || []
+
+    let tempScoreObj = {
+      name : nameInput,
+      score : currentScore
+    }
+    
+    highScores.push(tempScoreObj)
+    
+    localStorage.setItem("highScores", JSON.stringify(highScores)) 
   }
 
-// HIGH SCORE KEEPER
+// HIGH SCORE KEEPER!
 
 returnToBase.addEventListener("click", returnToMain);
 clearScores.addEventListener("click", clearHighScores);
 
 var highScoreListLi = document.createElement("li");
 // Get high-score data from local-storage
-var nameOutput = localStorage.getItem("name"); 
-var highScoreEl = localStorage.getItem("score");
+var highScoreEl = JSON.parse(localStorage.getItem("highScores"));
 
 function highScoreKeeper() { // highscore keeper function (local storage)
     console.log(highScoreData);
